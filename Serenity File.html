@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<title>Page Title</title>
+	<script src="cookies.js" type="text/javascript"></script>
+	<style>
+	body {
+		background-color: White;
+		width: 560px;
+		height: 400px;
+
+
+		font-size: 17px;
+	}
+
+	.logo  {
+		max-height: 90px;
+		padding: 10px;
+		display: block;
+		position: relative;
+		top: 0%;
+
+	}
+
+	.header-center {
+
+		font-style: bold;
+		font-size: 200%;
+		background-color: orange;
+		height:50px;
+		width: 1260px;
+		text-align:center;
+	}
+
+	.centered {
+
+		display: inline-block;
+		padding-top: 30px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 75em
+	}
+
+	form{
+
+		text-align: center;
+		font-size: 20px;
+	}
+
+
+	button{
+		position: relative;
+		left:600px;
+	}
+
+
+
+	#startOverButton{
+		position: relative;
+		left: 0px;
+		margin-top: 20px;
+	}
+	</style>
+	<script>
+
+	//Form lement
+	var formInputFirstNameElementId = "firstName";
+	var formInputLastNameElementId = "lastName";
+	var formInputEmailElementId = "emailAddress";
+
+	let resp ;
+	let result = [];
+	let firstPageElements = [];
+
+
+	var xhr = new XMLHttpRequest();
+	function GetData(){
+		xhr.open("GET", "http://serenity.ist.rit.edu/~ps6657/Project01/Data1/project.json");
+		xhr.setRequestHeader('Accept', 'text/plain');
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				// JSON.parse does not evaluate the attacker's scripts.
+				resp = JSON.parse(xhr.responseText);
+				createElement("24",[]);
+				// alert(resp);
+
+			}
+		}
+		xhr.send(null);
+	}
+
+	// function createBrElement(id){
+	//
+	// 	let br =  document.createElement("br");
+	// 	let brId = id;
+	// 	br.setAttribute("id",brId);
+	//
+	// 	return br;
+	//
+	//
+	// }
+	function clickEventListner(event){
+		let prev = 0;
+		var selectElement = event.target;
+		var index = parseInt(selectElement.id);
+		console.log(selectElement);
+		if(selectElement.selectedIndex === 0)
+		{
+			prev =1;
+		}
+		else {
+			prev=0;
+		}
+
+
+		console.log("new option" + selectElement.selectedIndex);
+		console.log("oldOption"+ prev);
+
+		let oldElement = document.getElementById(Object.keys(resp[parseInt(selectElement.id)].Relations[prev.toString()])[0]);
+		console.log("oldElement" ,oldElement);
+		for(let p = 0;p<result.length;p++){
+			result[p].remove();
+		}
+		while(oldElement !== null){
+			console.log("not empty");
+			var t = oldElement.selectedIndex;
+			if(Object.keys(resp[parseInt(oldElement.id)].Relations).length >0 && t >=0)
+			{
+				var childelem = document.getElementById(Object.keys(resp[parseInt(oldElement.id)].Relations[t])[0]);
+
+				// if(childelem !==null){
+				// 	childelem.remove();
+				//
+				// }
+				//	oldElement.parentNode.removeChild(oldElement);
+				oldElement.remove();
+				//var brElementToBeDeleted = document.getElementById(oldElement.id + "br");
+				var textElementToBeDeleted = document.getElementById(oldElement.id + "question");
+				//  brElementToBeDeleted.remove();
+				textElementToBeDeleted.remove();
+				//document.
+				oldElement= childelem;
+				console.log(oldElement);
+			}
+			else
+			{
+				oldElement.remove();
+				var textElementToBeDeleted = document.getElementById(oldElement.id + "question");
+				textElementToBeDeleted.remove();
+				oldElement = null;
+			}
+		}
+
+		var r = resp[index].Relations[selectElement.selectedIndex.toString()];
+		createElement(Object.keys(r)[0],Object.values(r)[0]);
+		if(Object.keys(resp[parseInt(Object.keys(r)[0])].Relations).length === 0){
+			console.log("ahuihd");
+			getSelectedOptions();
+		}
+	}
+
+	function createTextElement(id,textContent){
+		let textElement =  document.createElement("h5");
+		let textId = id ;
+		textElement.setAttribute("id",textId);
+		let textNode = document.createTextNode(textContent);
+		textElement.appendChild(textNode);
+		return textElement;
+	}
+
+	function createLinkElement(elementId, elementText, elementLink){
+		let index = parseInt(elementId);
+		var a = document.createElement('a');
+		a.setAttribute("id",elementId);
+		var linkText = document.createTextNode(elementText);
+		a.appendChild(linkText);
+		a.href = elementLink;
+		return a;
+	}
+
+	function createSelectElement(elementId,elementOptions){
+		let index = parseInt(elementId);
+		let selectElement = document.createElement("select");
+		selectElement.setAttribute("id",elementId);
+		let optionValues = Object.values(resp[index].values);
+		//console.log(resp);
+		if(elementOptions=== undefined || elementOptions.length === 0) {
+			for(let j = 0; j<optionValues.length;j++){
+				let selectOption = document.createElement("option");
+				selectOption.setAttribute("id","o" + j.toString());
+				selectOption.setAttribute("value",optionValues[j]);
+				let selectOptionValue = document.createTextNode(selectOption.value);
+				selectOption.appendChild(selectOptionValue);
+				selectElement.appendChild(selectOption);
+			}
+		}
+		else{
+			for(let k = 0;k<elementOptions.length;k++){
+				let selectOption = document.createElement("option");
+				selectOption.setAttribute("id","o" + k.toString());
+				selectOption.setAttribute("value",elementOptions[k]);
+				let selectOptionValue = document.createTextNode(selectOption.value);
+				selectOption.appendChild(selectOptionValue);
+				selectElement.appendChild(selectOption);
+
+			}
+		}
+		selectElement.selectedIndex = -1;
+		selectElement.addEventListener("change",clickEventListner);
+		return selectElement;
+	}
+
+	function createElement(elementId,elementOptions){
+		let index = parseInt(elementId);
+		var type = resp[index].type;
+		console.log(type);
+		var element ;
+		switch (type) {
+			case "select":
+			element = 	createSelectElement(elementId,elementOptions);
+			break;
+			case "a":
+			element  = createLinkElement(elementId, elementOptions[0], resp[parseInt(elementId)].values[elementOptions[0]]);
+			break;
+			default:
+			alert("Fatal Error:  element type ${type} not found")
+		}
+
+		let questionElement = createTextElement(elementId+ "question", resp[index].name);
+		document.body.append(questionElement);
+		console.log(element);
+		document.body.appendChild(element);
+
+		return element;
+	}
+
+	</script>
+
+
+	<script>
+	function getSelectedOptions(){
+		let selectedElements = document.getElementsByTagName("select");
+		let linkElements = document.getElementsByTagName("a");
+		var resultDic = [];
+		for(var i =0;i<selectedElements.length;i++){
+			var d = {};
+			d["type"] = "text";
+			d["context"] = resp[parseInt(selectedElements[i].id)].name;
+			d["value"] = selectedElements[i].options[selectedElements[i].selectedIndex].value;
+			d["linkText"] ="";
+			resultDic.push(d);
+			//document.getElementById(selectedElements[i].id+"question" );
+			result.push(document.getElementById(selectedElements[i].id+"question" ));
+			result.push(selectedElements[i]);
+		}
+
+		var e = {};
+		e["type"] = "href";
+		e["context"] = resp[parseInt(linkElements[0].id)].name;
+		e["value"] = linkElements[0].href;
+		e["linkText"] = linkElements[0].childNodes[0].textContent ;
+		result.push(document.getElementById(linkElements[0].id+"question" ));
+		linkElements[0].childNodes[0].remove();
+		result.push(linkElements[0]);
+		resultDic.push(e);
+		var resultString = JSON.stringify(resultDic);
+		localStorage.setItem("pranjal",resultString);
+		for(var i =0; i< result.length; i++)
+		{
+			result[i].remove();
+		}
+		var t = "Your choice are:";
+		document.body.appendChild(createTextElement("result"+i, t));
+		for(var i =0; i<resultDic.length;  i++){
+			if(resultDic[i].type === "text")
+			{
+				t = resultDic[i].context + "=>" +  resultDic[i].value;
+				var element = createTextElement("result"+i, t);
+				document.body.appendChild(element);
+			}else if(resultDic[i].type === "href"){
+				t = resultDic[i].context + "=>";
+				document.body.appendChild(createTextElement("result"+i, t));
+				var element = createLinkElement("result"+i, resultDic[i].linkText, resultDic[i].value);
+				document.body.appendChild(element);
+			}
+		}
+	}
+</script>
+
+<script>
+function formOnload(){
+
+	let divElement_1 = document.createElement("div");
+	divElement_1.setAttribute("id","divElement1");
+	divElement_1.setAttribute("class","splitright");
+	let divElement_2 = document.createElement("div");
+	divElement_2.setAttribute("id","divElement2");
+	divElement_2.setAttribute("class","centered");
+	let formElement = document.createElement("form");
+	var textElement = createTextElement("FirstNameText","First Name");
+	var firstNameElement = createInputElement("First Name", formInputFirstNameElementId,"text");
+	firstNameElement.setAttribute("placeholder"," Your first name");
+	firstNameElement.setAttribute("required","");
+	firstNameElement.setAttribute("pattern","[a-zA-Z]+");
+
+	formElement.appendChild(textElement);
+	formElement.appendChild(firstNameElement);
+	let inputLastName = createInputElement("Last Name", formInputLastNameElementId,"text");
+	textElement = createTextElement("LastNameText","Last Name");
+	inputLastName.setAttribute("placeholder","Your last name");
+	inputLastName.setAttribute("required","");
+	inputLastName.setAttribute("pattern","[a-zA-Z]+");
+
+	formElement.appendChild(textElement);
+	formElement.appendChild(inputLastName);
+	let inputEmailId = createInputElement("Email Id",formInputEmailElementId,"email");
+	inputEmailId.setAttribute("placeholder","abc@xyz.com");
+	inputEmailId.setAttribute("required","");
+
+	var emailElement = createTextElement("emailID","Email address");
+	formElement.appendChild(emailElement);
+	formElement.appendChild(inputEmailId);
+	formElement.appendChild(document.createElement("br"));
+	let submitButton = document.createElement("button");
+	var submitButtonText = document.createTextNode("Submit");
+	submitButton.appendChild(submitButtonText);
+	submitButton.addEventListener("click", submitButtonClickHandler);
+	divElement_2.appendChild(formElement);
+	divElement_2.appendChild(document.createElement("br"));
+	divElement_2.appendChild(submitButton);
+	divElement_1.appendChild(divElement_2);
+	let divElement_3 = document.createElement("div");
+	divElement_3.setAttribute("id","divElement3");
+	divElement_3.setAttribute("class","split left");
+	let divElement_4=document.createElement("div");
+	divElement_4.setAttribute("id","divElement4");
+	divElement_4.setAttribute("class","centered");
+	let divElement_5 = document.createElement("div");
+	divElement_5.setAttribute("id","divElement5");
+	divElement_5.setAttribute("class","header-center");
+	let headerText = document.createTextNode("Welcome to Rochester Intitute of Technology Study Abroad Program !!");
+	divElement_5.appendChild(headerText);
+	let logoImg = document.createElement("img");
+	logoImg.setAttribute("class","logo");
+	logoImg.setAttribute("src","ritlogo-web.jpg");
+	document.body.appendChild(logoImg);
+	document.body.appendChild(divElement_5);
+	document.body.appendChild(divElement_1);
+	firstPageElements.push(divElement_1);
+	console.log(document);
+}
+
+function createInputElement(name,id,type){
+
+	let inputElement = document.createElement("input");
+	inputElement.setAttribute("type",type);
+	inputElement.setAttribute("name",name);
+	inputElement.setAttribute("id",id);
+
+	return inputElement;
+}
+</script>
+<script>
+
+function checkValidity()
+{
+	var ele;
+	if(!(ele=document.getElementById(formInputFirstNameElementId)).checkValidity())
+	{
+	  ele.setCustomValidity("empty or invalid characters");
+		return false;
+	}
+
+	if(!(ele = document.getElementById(formInputLastNameElementId)).checkValidity())
+	{
+		ele.setCustomValidity("empty or invalid characters");
+		return false;
+	}
+
+	if(!(ele=document.getElementById(formInputEmailElementId)).checkValidity())
+	{
+		ele.setCustomValidity("invalid format");
+		return false;
+	}
+
+	return true;
+}
+
+function submitButtonClickHandler(){
+
+	if(checkValidity())
+	{
+		let startOverButton = document.createElement("button");
+		startOverButton.setAttribute("id","startOverButton");
+		let startOverText = document.createTextNode("Start Over");
+		startOverButton.appendChild(startOverText);
+		startOverButton.addEventListener("click",reloadSelectionPage);
+		document.body.appendChild(startOverButton);
+
+
+		console.log(document);
+		console.log("hellp");
+		console.log(document.body.childNodes);
+		let getInputValuesFirstName = document.getElementById(formInputFirstNameElementId).value;
+		console.log(getInputValuesFirstName);
+		let getInputValuesLastName = document.getElementById(formInputLastNameElementId).value;
+		console.log(getInputValuesLastName);
+		let getInputValuesEmailAddress = document.getElementById(formInputEmailElementId).value
+		console.log(getInputValuesEmailAddress);
+		cookies.setCookie("first_name",getInputValuesFirstName );
+		cookies.setCookie("last_name",getInputValuesLastName );
+		cookies.setCookie("email_address",getInputValuesEmailAddress );
+		console.log(document);
+		firstPageElements[0].remove();
+
+		//firstPageElements[2].remove();
+
+		let userId = cookies.getCookie("first_name");
+		if(userId){
+			let lm = cookies.getCookie("last_name");
+			document.body.appendChild(document.createTextNode("Welcome " + userId + " "));
+			GetData();
+		}
+		else {
+			firstPageElements = [];
+			formOnload();
+		}
+	}
+}
+
+function reloadSelectionPage(){
+
+	createElement("24",[]);
+}
+
+</script>
+
+
+</head>
+<body onload="formOnload()">
+
+</body>
+</html>
