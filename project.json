@@ -1,0 +1,333 @@
+[{
+	"id":"0",
+	"type":"select",
+	"name":"Which country do you want to study",
+	"values":{
+		"0":"UAE",
+		"1":"Europe"
+	},
+	"Relations":{
+		"0":{"1":[]},
+		"1":{"8":[]}
+
+	}
+},
+{
+	"id":"1",
+	"type":"select",
+	"name":"Type of Admission",
+	"values":{
+		"0":"Transfer Student",
+		"1":"Graduate Student"
+	},
+	"Relations":{
+		"0":{"2":[]},
+		"1":{"5":[]}
+
+	}
+},
+{
+	"id":"2",
+	"type":"select",
+	"name":"Course Interested",
+	"values":{
+		"0":"Management",
+		"1":"Science"
+	},
+	"Relations":{
+		"0":{"3":[]},
+		"1":{"4":[]}
+
+	}
+},
+{
+	"id":"3",
+	"type":"select",
+	"name":"Management Course",
+	"values":{
+		"0":"Project Management",
+		"1":"Business Intelligence"
+	},
+	"Relations":{
+		"0":{"15":["RIT Dubai Campus 1"]},
+		"1":{"15":["RIT Dubai Campus 2"]}
+	}
+},
+{
+	"id":"4",
+	"type":"select",
+	"name":"What courses you want to study",
+	"values":{
+		"0":"Software Engineering",
+		"1":"Computer Science"
+	},
+	"Relations":{
+		"0":{"15":["RIT Dubai Campus 1"]},
+		"1":{"15":["RIT Dubai Campus 2"]}
+	}
+},
+{
+	"id":"5",
+	"type":"select",
+	"name":"Type of Education",
+	"values":{
+		"0":"Full -Time",
+		"1":"Distant Course"
+	},
+	"Relations":{
+		"0":{"6":[]},
+		"1":{"7":[]}
+
+	}
+},
+{
+	"id":"6",
+	"type":"select",
+	"name":"Course Interested in",
+	"values":{
+		"0":"Science",
+		"1":"Management"
+	},
+	"Relations":{
+		"0":{"15":["RIT Dubai Campus 1"]},
+		"1":{"15":["RIT Dubai Campus 2"]}
+	}
+},
+{
+	"id":"7",
+	"type":"select",
+	"name":"Season you want to apply",
+	"values":{
+		"0":"Fall 2019",
+		"1":"Spring 2020"
+	},
+	"Relations":{
+		"0":{"15":["RIT Dubai Campus 1"]},
+		"1":{"15":["2IT Dubai Campus 2"]}
+	}
+},
+{
+	"id":"8",
+	"type":"select",
+	"name":" Which Language are you fluent in",
+	"values":{
+		"0":"English ",
+		"1":"Italian "
+	},
+	"Relations":{
+		"0":{"10":[]},
+		"1":{"13":[]}
+
+	}
+},
+{
+	"id":"9",
+	"type":"select",
+	"name":"Field of Study ",
+	"values":{
+		"0":"Mechanical Engineering",
+		"1":"Bio-tech Engineering"
+	},
+	"Relations":{
+		"0":{"15":["RIT Croatia Campus 1"]},
+		"1":{"15":["RIT Croatia Campus 2"]}
+
+	}
+},
+{
+	"id":"10",
+	"type":"select",
+	"name":"Program type",
+	"values":{
+		"0":"Bachelors",
+		"1":"Masters"
+	},
+	"Relations":{
+		"0":{"9":[]},
+		"1":{"11":[]}
+	}
+},
+{
+	"id":"11",
+	"type":"select",
+	"name":"Are you a applying for Full-time or Part-time",
+	"values":{
+		"0":"Full-time",
+		"1":"Part-time"
+	},
+	"Relations":{
+		"0":{"15":["0"]},
+		"1":{"15":["1"]}
+	}
+},
+{
+	"id":"12",
+	"type":"select",
+	"name":"Looking for Assistanceship",
+	"values":{
+		"0":"GA",
+		"1":"RA"
+	},
+	"Relations":{
+		"0":{"15":["RIT Croatia Campus 1"]},
+		"1":{"15":["RIT Croatia Campus 2"]}
+
+	}
+},
+{
+	"id":"13",
+	"type":"select",
+	"name":"Interested Stream for Studies",
+	"values":{
+		"0":"Aviation Engineering",
+		"1":"Information Technology"
+	},
+	"Relations":{
+		"0":{"12":[]},
+		"1":{"14":[]}
+
+	}
+},
+{
+	"id":"14",
+	"type":"select",
+	"name":"Course provided",
+	"values":{
+		"0":"Cloud Infrastructure",
+		"1":"Data Science "
+	},
+	"Relations":{
+		"0":{"15":["RIT Croatia Campus 1"]},
+		"1":{"15":["RIT Croatia Campus 2"]}
+	}
+},
+{
+	"id":"15",
+	"type":"a",
+	"name":"Your Final Destination is ",
+	"values":{
+		"RIT Dubai Campus 1":"https://www.rit.edu/dubai/",
+		"RIT Dubai Campus 2":"https://www.rit.edu/dubai/",
+		"RIT Croatia Campus 1":"https://www.croatia.rit.edu/",
+		"RIT Croatia Campus 2":"https://www.croatia.rit.edu/"
+	},
+	"Relations":{}
+},
+{"id":"16",
+  "type":"select",
+  "name":"Do you prefer cities or nature ?",
+  "values":{
+    "0":"cities",
+    "1":"nature"
+  },
+  "Relations":{
+    "0":{"17":[]},
+    "1":{"20":[]}
+  }
+},
+{"id":"17",
+  "type":"select",
+  "name":"Do you prefer Arabic or Spanish ?",
+  "values":{
+    "0":"Arabic",
+    "1":"Spanish"
+  },
+  "Relations":{
+    "0":{"18":[]},
+    "1":{"19":[]}
+  }
+},
+{
+  "id":"18",
+  "type":"select",
+  "name":"Do you prefer Ancient or new cities ?",
+  "values":{
+    "0":"Ancient",
+    "1":"New Cities"
+  },
+  "Relations":{
+    "0":{"23":["Middle East Studies"]},
+    "1":{"23":["RIT Dubai Direct - Enroll"]}
+  }
+},
+{"id":"19",
+  "type":"select",
+  "name":"Do you prefer Humanities or Science ?",
+  "values":{
+    "0":"Humanities",
+    "1":"Science"
+  },
+  "Relations":{
+    "0":{"23":["Advance Liberal Art Barcelona"]},
+    "1":{"23":["Santiago Health Studies"]}
+  }
+},
+{
+  "id":"20",
+  "type":"select",
+  "name":"Do you prefer mountains or islands?",
+  "values":{
+    "0":"Mountains",
+    "1":"Islands"
+  },
+  "Relations":{
+    "0":{"21":[]},
+    "1":{"22":[]}
+  }
+},
+{
+  "id":"21",
+  "type":"select",
+  "name":"Do you prefer South America or Asia ?",
+  "values":{
+    "0":"South America",
+    "1":"Asia"
+  },
+  "Relations":{
+    "0":{"23":["Semester In Cusco - Universidad San Ignacio Loyola"]},
+    "1":{"23":["Big Cat of the Himalaya : Tracking & Conservation"]}
+  }
+},
+{
+  "id":"22",
+  "type":"select",
+  "name":"Do you prefer the Caribbean or South Pacific?",
+  "values":{
+    "0":"Caribbean",
+    "1":"South Pacific"
+  },
+  "Relations":{
+    "0":{"23":["Marine Resource Studies"]},
+    "1":{"23":["Protecting the Phoenix Islands"]}
+  }
+},
+{
+  "id":"23",
+  "type":"a",
+  "name":"Your Final Destination is",
+  "values":{
+    "Middle East Studies":"https://www.rit.edu/study/international-and-global-studies-bs",
+    "RIT Dubai Direct - Enroll":"https://www.rit.edu/academicaffairs/global/rit-dubai-0",
+    "Advance Liberal Art Barcelona":"https://www.ciee.org/go-abroad/college-study-abroad/programs/spain/barcelona/advanced-liberal-arts",
+    "Santiago Health Studies":"https://www.iesabroad.org/programs/santiago-health-studies",
+    "Semester In Cusco - Universidad San Ignacio Loyola":"https://www.cisabroad.com/study-abroad/semester-in-cusco/",
+    "Big Cat of the Himalaya : Tracking & Conservation":"https://fieldstudies.org/program/bhutan-summer2/",
+    "Marine Resource Studies":"http://worldoceanobservatory.org/content/online-resources-marine-biology",
+    "Protecting the Phoenix Islands":"https://www.sea.edu/voyages/protecting_phoenix_islands_summer2018"
+  },
+  "Relations":{}
+},
+{
+	"id":"24",
+	"type":"select",
+	"name":"Data Source",
+	"values":{
+		"0":"Data 1",
+		"1":"Data 2"
+	},
+	"Relations":{
+		"0":{"0":[]},
+		"1":{"16":[]}
+	}
+}
+]
